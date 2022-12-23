@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <title> Таблица и график функции </title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="templates/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="left">
+        <p>
+            <b>f(x) = x ** 3 - 6 * x ** 2 + x + 5 </b>
+        </p>
+        <table>
+            <tr>
+                <th>x</th>
+                <th>f(x)</th>
+            </tr>
+            <tbody>
+            {% for i in range(len) %}
+            <tr>
+                <td>{{x[i]}}</td>
+                <td>{{y[i]}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="right">
+        <img src="{{pict}}" alt="graph">
+    </div>
+</div>
+</body>
+</html>

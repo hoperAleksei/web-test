@@ -1,6 +1,6 @@
 import sqlite3
 
-con = sqlite3.connect("sqlite/travel_agency.sqlite")
+con = sqlite3.connect("../sqlite/travel_agency.sqlite")
 f_damp = open('sqlite/travel_agency.db', 'r', encoding='utf-8-sig')
 # читаем данные из файла
 damp = f_damp.read()

@@ -2,9 +2,9 @@ import sqlite3
 import pprint
 
 if __name__ == '__main__':
-    con = sqlite3.connect("bkp/library.sqlite")
+    con = sqlite3.connect("library.sqlite")
 
-    f_damp = open('bkp/library.db', 'r', encoding='utf-8-sig')
+    f_damp = open('library.db', 'r', encoding='utf-8-sig')
     damp = f_damp.read()
     f_damp.close()
     con.executescript(damp)
