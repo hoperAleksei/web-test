@@ -1,0 +1,44 @@
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title> lab41 </title>
+    {% macro render_table(table_name, relation) %}
+        <div>
+            {% set n = len(relation) %}
+            <table>
+                <caption>{{table_name}}</caption>
+                <tr style="background-color: rgb(242, 242, 242);">
+                    {% for name in relation.dtypes.index %}
+                    <th>{{name}}</th>
+                    {% endfor %}
+                </tr>
+                <tbody>
+
+                {% for i in range(n) %}
+                <tr>
+                    {% for name in relation.dtypes.index %}
+                    <td> {{ relation.loc[i, name] }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endmacro %}
+<!--    <link rel="stylesheet" href="style.css">-->
+</head>
+<body>
+<div class="container">
+    {{render_table(table_1, relation_1)}}
+    {{render_table(table_2, relation_2)}}
+    {{render_table(table_3, relation_3)}}
+    {{render_table(table_4, relation_4)}}
+    {{render_table(table_5, relation_5)}}
+
+</div>
+<div class="container">
+    {{render_table(table_6, relation_6)}}
+    {{render_table(table_7, relation_7)}}
+</div>
+</body>
+</html>

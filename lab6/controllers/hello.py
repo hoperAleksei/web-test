@@ -22,8 +22,11 @@ def hello():
     subjects_select = [constants.subjects[int(i)] for i in subject_id]
     olympiad_id = request.values.getlist('olympiad[]')
     olympiads_select = [constants.olympiads[int(i)] for i in olympiad_id]
+    req = request.values.getlist('req')
+
     html = render_template(
         'hello.html',
+        req=req,
         name=name,
         gender=gender,
         program=constants.programs[int(program_id)],

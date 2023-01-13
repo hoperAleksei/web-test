@@ -60,3 +60,18 @@ where city_id in (SELECT id
 
 -- Вывести среднюю цену тура на каждый курорт
 -- без учета туров с самой большой и самой маленькой ценой
+
+select avg(cost), name
+from (select cost, r.name as name
+      from tour
+               join hotel h on tour.hotel_id = h.id
+               join resort r on h.resort_id = r.id
+      except
+
+      select cost, r.name as name
+      from tour
+               join hotel h on tour.hotel_id = h.id
+               join resort r on h.resort_id = r.id
+      where cost in (select min(cost) from tour)
+         or cost in (select max(cost) from tour))
+group by name;

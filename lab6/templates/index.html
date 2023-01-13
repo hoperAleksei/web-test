@@ -4,33 +4,78 @@
     <title> Приветствие </title>
 </head>
 <body>
-<form action="{{ url_for('hello') }}" method="get">
-    <p>Имя: <input type=text name=username></p>
+<form method="get">
+    <p>Имя: <input type=text name=username value={{name if name else ""}}></p>
     <p>Пол:<br>
-        <input type=radio name=gender value=w> Ж <br>
-        <input type=radio name=gender value=m> M
+        <input type=radio name=gender value=w {% if gender == "w" %}} checked {% endif %}> Ж <br>
+        <input type=radio name=gender value=m {% if gender == "m" %}} checked {% endif %}> M
     </p>
     Образовательная программа:
     <select name=program>
         {% for i in range(len(program_list)) %}
-        <option value={{i}}>{{program_list[i]}}</option>
+        <option value={{i}} {% if program_list[i] == program %}} selected {% endif %}>{{program_list[i]}}</option>
         {% endfor %}
     </select>
     </p>
     <p>
         Выберите дисциплины, которые Вы изучаете:<br>
         {% for i in range(len(subject_list)) %}
-        <input type=checkbox name=subject[] value={{i}}>
+        {{i}}
+        <input type=checkbox name=subject[] value={{i}} {% if subject_list[i] in subjects_select %} checked {% endif %}>
         {{subject_list[i]}}<br>
         {% endfor %}
     </p>
 <p>
         Выберите олимпиады, в которых Вы участвуете:<br>
         {% for i in range(len(olympiad_list)) %}
-        <input type=checkbox name=olympiad[] value={{i}}>
+        <input type=checkbox name=olympiad[] value={{i}} {% if olympiad_list[i] in olympiads_select %} checked {% endif %}>
         {{olympiad_list[i]}}<br>
         {% endfor %}
     <p><input type=submit value=Отправить></p>
+    <input type="hidden" name="req" value="True">
 </form>
+{% if req %}
+<p>
+    {% if not name %}
+    Введите имя, пожалуйста!
+    {% else %}
+    Привет,
+    {% if gender == "m" %}
+    студент
+    {% elif gender == "w" %}
+    студентка
+    {% endif %}
+
+
+    {{name}}!
+</p>
+<p>
+    Ваша образовательная программа: {{program}}.
+</p>
+<p>
+    {% if subjects_select %}
+    Вы изучаете дисциплины:
+    {% for sub in subjects_select %}
+    <a href={{ url_for('subject', sub=sub) }}> {{sub}}</a>,
+    {% endfor %}
+    {% else %}
+    Вы не изучаете никаких дисциплин.
+    {% endif %}
+</p>
+<p>
+    {% if olympiads_select %}
+    Вы участвуете в олимпиадах:
+    {% for oly in olympiads_select %}
+    <a href={{ url_for('olympiad', oly=oly) }}> {{oly}}</a>,
+    {% endfor %}
+    {% else %}
+    Вы не участвуете в олимпиадах.
+    {% endif %}
+    {% endif %}
+</p>
+<input type="button" value="Отчистить" onclick="document.location = 'http://127.0.0.1:5000/'">
+<input type="button" value="Вернуться" onclick="history.back()">
+{% endif %}
+
 </body>
 </html>

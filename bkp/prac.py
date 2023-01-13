@@ -2,7 +2,7 @@ import sqlite3
 import pprint
 
 if __name__ == '__main__':
-    con = sqlite3.connect("library.sqlite")
+    con = sqlite3.connect("../lab4/lab_4_1/library.sqlite")
 
     f_damp = open('library.db', 'r', encoding='utf-8-sig')
     damp = f_damp.read()
