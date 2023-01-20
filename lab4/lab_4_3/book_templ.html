@@ -26,9 +26,11 @@
         {% for name in card.dtypes.index %}
         <p>{{ name }}: <b>{{ card.loc[i, name] }}</b></p>
         {% endfor %}
+        {% if card.loc[i, "Количество"] > 0 %}
         <div class="button-wrapper">
             <button type="submit">Выбрать</button>
         </div>
+        {% endif %}
     </div>
     {% endfor %}
     {% endmacro %}
